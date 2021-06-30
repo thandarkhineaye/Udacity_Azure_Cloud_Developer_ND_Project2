@@ -1,0 +1,201 @@
+data:
+  APPINSIGHTS_INSTRUMENTATIONKEY: Y2U1ZTlmNGEtNWE5YS00NDViLWI0OTQtMjIzY2NiNThjNThm
+  APPLICATIONINSIGHTS_CONNECTION_STRING: SW5zdHJ1bWVudGF0aW9uS2V5PWNlNWU5ZjRhLTVhOWEtNDQ1Yi1iNDk0LTIyM2NjYjU4YzU4ZjtJbmdlc3Rpb25FbmRwb2ludD1odHRwczovL2phcGFuZWFzdC0xLmluLmFwcGxpY2F0aW9uaW5zaWdodHMuYXp1cmUuY29tLw==
+  AzureWebJobs.WarmUp.Disabled: MQ==
+  FUNCTIONS_EXTENSION_VERSION: fjM=
+  AzureWebJobsStorage: RGVmYXVsdEVuZHBvaW50c1Byb3RvY29sPWh0dHBzO0FjY291bnROYW1lPWF6dXJlbWljcm9zZXJ2aWNlc3BqO0FjY291bnRLZXk9UXVYR2Y2enpDRk11Z2pvc3Y0SC9HbDR3dWhZUitWSU5pb1RadE9XeHBCWnJocFdrNUZPbW82TDFWRndWN05FcXlzbitJaElpeEwrWkZDZlg3THFFY0E9PTtFbmRwb2ludFN1ZmZpeD1jb3JlLndpbmRvd3MubmV0
+  FUNCTIONS_WORKER_RUNTIME: cHl0aG9u
+  azure_microservice_pj_db_connection: bW9uZ29kYjovL2F6dXJlLW1pY3Jvc2VydmljZS1kYjpSSERJMG14SG5CdDl6MXIyMEFmcVhzZ1BRUUZCQ0tXQVl2aWhaUnlCTnV1YWdPWG1kZkhldHhNTERsYlVBQ1FicUFCYklVRkg5WndrV3RHenBWcWpPZz09QGF6dXJlLW1pY3Jvc2VydmljZS1kYi5tb25nby5jb3Ntb3MuYXp1cmUuY29tOjEwMjU1Lz9zc2w9dHJ1ZSZyZXBsaWNhU2V0PWdsb2JhbGRiJnJldHJ5d3JpdGVzPWZhbHNlJm1heElkbGVUaW1lTVM9MTIwMDAwJmFwcE5hbWU9QGF6dXJlLW1pY3Jvc2VydmljZS1kYkA=
+apiVersion: v1
+kind: Secret
+metadata:
+  name: docker20210622
+---
+data:
+  host.master: QVR3c2E1RFVaaEN3R1J0SjUzTDc2YlhWdW9qUDhKUjR6aFFCeC9jd1Q2Z0g1WWZ6L0U2RkxRPT0=
+  host.function.default: L0NHSnBNSmlhMm9nelFhOGhSaHFGMk9TaWxCUzd6QnpleDZIUGN0aTR3WHZnVVlhc0M2YlVBPT0=
+  host.systemKey.default: REFmdlhOVGlNRDhhMy9xRmU3eG12bS9qWVQxNHZWMHNPdTRQY0VYdTVFL2pLaUJVT25MdjRnPT0=
+  functions.createadvertisement.default: V0t2c3FSNm1QbDBhc0loQnZiQ1RxNVh5djhrbHkwRFlwWVhPZTNFSG8wRm1UbnVCdWYxV3RBPT0=
+  functions.deleteadvertisement.default: NnR0Yk5HVEgvU2ZaSXlqZ2JsRFlaMHpuUmNwSzhvSkF3TmFSRDNha1hBYzRaYXFRUkxNcTR3PT0=
+  functions.getadvertisement.default: MG5taFhMemV0MmVadmdMYlRVZmkydE80RGhva3JKTDE3enVnTmdyUzlFa3pPRTNzanBpVmpnPT0=
+  functions.getadvertisements.default: YWYzVnpuZUI1TXBkdXR1UEJNM1p6bUVIYXM3ZGFKblVTMVVqYnRYWnRIT1JxZ2FVTHk1SnZ3PT0=
+  functions.getposts.default: MHRDbnFJU1BjbVp5NEFxdElFa2UxZExEa2RkZ0xwWkxyUXlYbFBuZmVndlRUdXEzL0RQUWJBPT0=
+  functions.getpost.default: SlJJbzEyN2ZXRjh6Y2ZkVDd5MXlDVm5iV1UzMWZYV3NLWDhaL25LZ1dYdzZQY2lYeXAwTEJ3PT0=
+  functions.updateadvertisement.default: NHVSczV6YmZRU1h5UkllcVVJV2VEbkFjQnNDUHdibUtGT05LdGhmc05MYzFFNDc4NVVTOUl3PT0=
+apiVersion: v1
+kind: Secret
+metadata:
+  name: func-keys-kube-secret-docker20210622
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: docker20210622-function-keys-identity-svc-act
+---
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  - configMaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: functions-keys-manager-role
+---
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: functions-keys-manager-role
+subjects:
+- kind: ServiceAccount
+  name: docker20210622-function-keys-identity-svc-act
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: docker20210622-function-keys-identity-svc-act-functions-keys-manager-rolebinding
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker20210622-http
+spec:
+  selector:
+    app: docker20210622-http
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker20210622-http
+  labels:
+    app: docker20210622-http
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker20210622-http
+  template:
+    metadata:
+      labels:
+        app: docker20210622-http
+    spec:
+      containers:
+      - name: docker20210622-http
+        image: docker20210622.azurecr.io/myneighborlyapp
+        ports:
+        - containerPort: 80
+        env:
+        - name: AzureFunctionsJobHost__functions__0
+          value: createAdvertisement
+        - name: AzureFunctionsJobHost__functions__1
+          value: deleteAdvertisement
+        - name: AzureFunctionsJobHost__functions__2
+          value: getAdvertisement
+        - name: AzureFunctionsJobHost__functions__3
+          value: getAdvertisements
+        - name: AzureFunctionsJobHost__functions__4
+          value: getPosts
+        - name: AzureFunctionsJobHost__functions__5
+          value: getpost
+        - name: AzureFunctionsJobHost__functions__6
+          value: updateAdvertisement
+        - name: AzureWebJobsSecretStorageType
+          value: kubernetes
+        - name: AzureWebJobsKubernetesSecretName
+          value: secrets/func-keys-kube-secret-docker20210622
+        envFrom:
+        - secretRef:
+            name: docker20210622
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 240
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+        startupProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 240
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+      serviceAccountName: docker20210622-function-keys-identity-svc-act
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker20210622
+  labels:
+    app: docker20210622
+spec:
+  selector:
+    matchLabels:
+      app: docker20210622
+  template:
+    metadata:
+      labels:
+        app: docker20210622
+    spec:
+      containers:
+      - name: docker20210622
+        image: docker20210622.azurecr.io/myneighborlyapp
+        env:
+        - name: AzureFunctionsJobHost__functions__0
+          value: eventHubTrigger
+        envFrom:
+        - secretRef:
+            name: docker20210622
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 240
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+        startupProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 240
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+      serviceAccountName: docker20210622-function-keys-identity-svc-act
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: docker20210622
+  labels: {}
+spec:
+  scaleTargetRef:
+    name: docker20210622
+  triggers:
+  - type: eventgridtrigger
+    metadata:
+      direction: in
+      eventHubName: testhub
+      connection: azure_microservice_pj_db_connection
+---
+

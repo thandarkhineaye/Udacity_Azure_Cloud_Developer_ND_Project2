@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "ce5e9f4a-5a9a-445b-b494-223ccb58c58f",
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=ce5e9f4a-5a9a-445b-b494-223ccb58c58f;IngestionEndpoint=https://japaneast-1.in.applicationinsights.azure.com/",
+    "AzureWebJobs.WarmUp.Disabled": "1",
+    "FUNCTIONS_EXTENSION_VERSION": "~3",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=azuremicroservicespj;AccountKey=QuXGf6zzCFMugjosv4H/Gl4wuhYR+VINioTZtOWxpBZrhpWk5FOmo6L1VFwV7NEqysn+IhIixL+ZFCfX7LqEcA==;EndpointSuffix=core.windows.net", 
+    "FUNCTIONS_WORKER_RUNTIME": "python", 
+    "azure_microservice_pj_db_connection": "mongodb://azure-microservice-db:RHDI0mxHnBt9z1r20AfqXsgPQQFBCKWAYvihZRyBNuuagOXmdfHetxMLDlbUACQbqABbIUFH9ZwkWtGzpVqjOg==@azure-microservice-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@azure-microservice-db@" 
+  }
+}
